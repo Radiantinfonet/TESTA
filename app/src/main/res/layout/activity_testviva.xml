@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/r11"
+    tools:context="com.radiant.rpl.testa.ExamSection.Testviva">
+
+
+    <android.support.v4.widget.DrawerLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.radiant.rpl.testa.ExamSection.TestQuestion"
+        android:id="@+id/activity_main2">
+
+
+        <include layout="@layout/app_bar1"></include>
+
+
+        <LinearLayout
+            android:id="@+id/len2"
+            android:weightSum="4"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#211E1E"
+                android:layout_weight="0.2">
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:id="@+id/qno2"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:text="Question:" />
+
+                <TextView
+                    android:id="@+id/qtv2"
+                    android:textColor="@color/white"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.2">
+
+
+
+
+
+                <GridView
+                    android:id="@+id/drawer_right1"
+                    android:divider="@android:color/transparent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:numColumns="4"
+                    android:padding="10dp"
+                    android:horizontalSpacing="5dp"
+                    android:verticalSpacing="5dp"
+                    android:scrollbars="vertical"
+                    android:background="#453D3D">
+
+
+
+                </GridView>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#201919"
+                android:orientation="vertical"
+                android:layout_weight="0.6">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+
+                        android:drawableLeft="@drawable/answered"
+                        android:text="Answered"
+                        android:id="@+id/ans1"
+                        android:drawablePadding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        />
+
+
+
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:id="@+id/not_ans1"
+                        android:text="Not Answered"
+                        android:drawablePadding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:drawableLeft="@drawable/not_answered"
+
+
+                        />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+
+                        android:id="@+id/marked_for_review1"
+                        android:text="Marked for Review"
+                        android:drawablePadding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:drawableLeft="@drawable/marked_for_review"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/notvisted1"
+                        android:text="Not visited"
+                        android:drawablePadding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:drawableLeft="@drawable/notvisited"
+                        />
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+                <!--<TextView
+                    android:layout_marginLeft="10dp"
+
+                    android:id="@+id/marked_for_review_answered"
+                    android:text="Marked for review and answered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:drawableLeft="@drawable/marked_for_review_answered"
+                    />
+    -->
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/activity_main2"
+            >
+            <include
+                android:id="@+id/count_down_strip1" layout="@layout/countdown_timer_header1"
+                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="?attr/actionBarSize"
+                />
+
+
+            <fragment
+                android:id="@+id/fragmentParent1"
+                android:name="com.radiant.rpl.testa.ExamSection.FragmentParent1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/count_down_strip1"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true" />
+        </RelativeLayout>
+
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
+
+
+

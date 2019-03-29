@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#529C9C</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="lightbluee"> #4286f4</color>
+    <color name="colorBackground">#333C46</color>
+    <color name="colorSplashText">#F0F0F0</color>
+    <color name="colorProgressBar">#FFCE511C</color>
+    <color name="colorTextView">#83898E</color>
+    <color name="bluecolorr"> #0000ff</color>
+    <color name="darkbluee">#003366</color>
+    <color name="grey">#d9d9d9</color>
+    <color name="lightgrey">#D3D3D3</color>
+    <color name="purple">#EE82EE</color>
+    <color name="white">#ffffffff</color>
+    <color name="darkBlueColor">#ff009ee5</color>
+    <color name="darkblack">#000000</color>
+    <color name="BBlue">#2E78B5</color>
+    <color name="Btext">#707070</color>
+    <color name="Border">#A5A5A5</color>
+
+
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<android.support.v7.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/BBlue"
+    android:id="@+id/toolbar"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THEORY QUESTIONS"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            />
+        <ImageButton
+            android:id="@+id/imgRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="15sp"
+            android:background="@drawable/ic_filter"
+            />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.Toolbar>
+</RelativeLayout>

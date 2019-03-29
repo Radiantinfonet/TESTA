@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal"  android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginTop="4.0dip"
+    android:layout_marginRight="8.0dip" android:minHeight="52.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+   <!-- <TextView
+        android:id="@+id/mark"
+        android:textColor="@color/darkBlueColor"
+        android:gravity="center_vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="15.0dip"
+        android:text="Review Later"
+        android:drawablePadding="6.0dip"
+        android:layout_weight="1.0"
+        style="@style/text_h4" />-->
+
+
+
+    <View android:background="#73ffffff" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+
+    <TextView android:textColor="#ffffff" android:gravity="center"
+        android:layout_gravity="center" android:id="@+id/timer1"
+        android:background="@color/BBlue"
+        android:layout_marginTop="5dp"
+        android:layout_width="0.0dip" android:layout_height="60dp"
+        android:text="00:00" android:layout_weight="1.0"
+        style="@style/text_h4" />
+
+    <View android:background="#73ffffff" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+
+
+    <TextView android:textColor="#ffffff" android:gravity="center" android:layout_gravity="center" android:id="@+id/finish1"
+        android:layout_width="0.0dip"
+        android:background="#c70202"
+        android:layout_marginTop="5dp"
+               android:visibility="invisible"
+        android:layout_height="60dp" android:text="Submit" android:layout_weight="1.0" style="@style/text_h4" />
+</LinearLayout>

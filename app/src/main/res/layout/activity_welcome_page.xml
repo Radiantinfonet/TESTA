@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="6.5"
+    android:background="@color/white"
+    tools:context="com.radiant.rpl.testa.Welcome_page">
+
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView5"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:text="Vipin"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:textColor="#030900"-->
+        <!--android:textSize="30sp"-->
+        <!--android:shadowRadius="50dp"/>-->
+
+
+<!--    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/set_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_textbox"
+        android:drawablePadding="10dp"
+        android:textAlignment="center"
+        />-->
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/set_photo"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/splashimg"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
+
+
+    <TextView
+
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Welcome"
+        android:layout_weight="1"
+        android:textSize="22sp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+
+        />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Vipin"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <!--<com.hanks.htextview.typer.TyperTextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/textView2"
+        android:layout_weight="1"
+        android:textSize="36sp"
+        android:text="Vipin Rai"
+        android:layout_margin="10dp"
+        app:charIncrease="3"
+        app:typerSpeed="80"/>
+    -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_margin="10dp"
+        android:textSize="16sp"
+        android:text="Mark Your Attendance on the next page and kindly follow the instructions to start the Assessment."
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <com.ebanx.swipebtn.SwipeButton
+        android:id="@+id/swipe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:inner_text="SWIPE TO BEGIN"
+        android:layout_margin="10dp"
+        app:inner_text_color="@android:color/white"
+        app:inner_text_size="16sp"
+        app:inner_text_top_padding="18dp"
+        app:inner_text_bottom_padding="18dp"
+        app:inner_text_background="@drawable/shape_rounded"
+        app:button_image_height="60dp"
+        app:button_image_width="100dp"
+        app:button_image_disabled="@drawable/icarrow"
+        app:button_image_enabled="@drawable/icarrow"
+        app:button_left_padding="20dp"
+        app:button_right_padding="20dp"
+        app:button_top_padding="20dp"
+        app:button_bottom_padding="20dp"
+        app:button_background="@drawable/shape_button"
+        app:initial_state="disabled"
+        app:has_activate_state="false"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
+        android:text="OR"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
+        android:id="@+id/logouttext"
+        android:text="@string/Update_Profile"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"
+        android:background="@drawable/custom_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+
+        />
+
+</LinearLayout>

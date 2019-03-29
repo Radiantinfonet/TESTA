@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:background="#ffffff"
+    android:elevation="10dp"
+    android:id="@+id/cardv1"
+    android:orientation="vertical">
+
+   <!-- <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="2dp"
+        tools:ignore="RtlCompat">
+
+
+
+        <TextView
+            android:id="@+id/meetStatus"
+            style="@style/locationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textMenu"
+            android:layout_width="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="&#8942;"
+            android:textAppearance="?android:textAppearanceLarge" />
+    </RelativeLayout>-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="2dp"
+        tools:ignore="RtlCompat">
+
+        <TextView
+            style="@style/accountnameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Name : " />
+
+        <TextView
+            android:id="@+id/maccountName"
+            style="@style/locationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="2dp"
+        tools:ignore="RtlCompat">
+
+        <TextView
+            style="@style/accountnameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D.O.B : " />
+
+        <TextView
+            android:id="@+id/mcontactperson"
+            style="@style/locationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="2dp"
+        tools:ignore="RtlCompat">
+
+        <TextView
+            style="@style/accountnameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile : " />
+
+        <TextView
+            android:id="@+id/mlocation"
+            style="@style/locationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            style="@style/accountnameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Id : " />
+
+        <TextView
+            android:id="@+id/mstartDate"
+            style="@style/locationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="2dp"
+        tools:ignore="RtlCompat">
+
+        <TextView
+            style="@style/accountnameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Present/Absent : " />
+
+        <TextView
+            android:id="@+id/mendDate"
+            style="@style/locationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
