@@ -380,7 +380,7 @@ public class MainActivity extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -391,6 +391,9 @@ public class MainActivity extends AppCompatActivity{
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
+                } else{
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
 
             }
@@ -408,7 +411,7 @@ public class MainActivity extends AppCompatActivity{
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public void onClick(View v) {
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                         if (checkSelfPermission(Manifest.permission.CAMERA)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -420,7 +423,13 @@ public class MainActivity extends AppCompatActivity{
                         startActivityForResult(cameraIntent, CAMERA_REQUEST);
                     }
 
-                }}
+                }
+                    else {
+                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                    }
+            }
+
             });}
 
         catch (Exception e){
@@ -434,7 +443,7 @@ public class MainActivity extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -443,6 +452,9 @@ public class MainActivity extends AppCompatActivity{
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
                 }
+                }else {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
                 }
 
             }
@@ -457,7 +469,7 @@ public class MainActivity extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -467,7 +479,10 @@ public class MainActivity extends AppCompatActivity{
                     startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
                 }
 
-            }
+            }else{
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
+                }
             }
         });
 

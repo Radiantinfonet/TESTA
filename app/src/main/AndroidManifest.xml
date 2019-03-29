@@ -68,6 +68,8 @@
             android:theme="@style/Apptheme2" />
         <activity
             android:name="com.radiant.rpl.testa.Registration_Done"
+            android:theme="@style/Apptheme2"
+            android:label="Registered"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.radiant.rpl.testa.Start_Registration"

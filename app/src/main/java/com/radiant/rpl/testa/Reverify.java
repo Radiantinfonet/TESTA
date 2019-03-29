@@ -28,8 +28,8 @@ import radiant.rpl.radiantrpl.R;
 
 public class Reverify extends AppCompatActivity {
 
-    EditText fname_txt,lname_txt,mob_txt,aadharno_txt,bankacc_txt;
-    String fname,lname,mob,aadharno,bankacc,yearobirth,monthobirth,dateobirthh,gender,bank1,statee,districtt,educationn,employedd,employerr,sectorr,addline11,addline22,pincode1,nameasinbank1,
+    EditText fname_txt,lname_txt,mob_txt,aadharno_txt,bankacc_txt,pan_text,Name_in_bank_txt,Ifsc_code_txt;
+    String fname,lname,mob,aadharno,bankacc,yearobirth,monthobirth,dateobirthh,gender,bank1,statee,districtt,educationn,pancardd,alternatenumber,employerr,sectorr,addline11,addline22,pincode1,nameasinbank1,
     iffccode1,photouri,jobrolee,empidd,locationn,aadharpic,language,category1,Email1;
     String getFname,getLname,getMob,getAadharno,getBankacc;
     ProgressDialog pd;
@@ -46,6 +46,9 @@ public class Reverify extends AppCompatActivity {
         mob_txt=findViewById(R.id.input_mobile_noo);
         aadharno_txt=findViewById(R.id.input_aadhar_no);
         bankacc_txt=findViewById(R.id.input_bank_acdetails);
+        pan_text=findViewById(R.id.input_pancard);
+        Name_in_bank_txt=findViewById(R.id.input_bank_username1);
+        Ifsc_code_txt=findViewById(R.id.input_ifsc_code1);
         geturl= Start_Registration.getURL();
         gettestingurl=Start_Registration.getTestingURL();
         awesomeValidation=new AwesomeValidation(ValidationStyle.BASIC);
@@ -109,6 +112,16 @@ public class Reverify extends AppCompatActivity {
         awesomeValidation.addValidation(Reverify.this, R.id.input_bank_acdetails,"^[0-9]{6,18}$", R.string.err_msg_for_acno);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+      /*  if (!pincode1.equals(null)){
+            pan_text.setEnabled(false);
+        }
+        else if (!aadharno.equals(null)){
+            aadharno_txt.setEnabled(false);
+        }*/
+    }
 
     private void SaveDetail(final String fnamee, final String lnamee, final String mobbb, final String aadhaar, final String bankacccc) {
         String serverURL = "https://www.skillassessment.org/sdms/android_connect/save_student_data.php";
@@ -185,7 +198,7 @@ public class Reverify extends AppCompatActivity {
                 map.put("state_id",statee);
                 map.put("district_id",districtt);
                 map.put("pincode",pincode1);
-                map.put("aadhar",aadharno);
+                map.put("aadhar",aadharno_txt.getText().toString());
                 map.put("ssc_id",sectorr);
                 map.put("company_id",employerr);
                 map.put("sector_id","0");
