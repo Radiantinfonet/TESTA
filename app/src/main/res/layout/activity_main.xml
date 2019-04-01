@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee"
+    android:id="@+id/register_yourself"
     tools:context="com.radiant.rpl.testa.MainActivity">
     <!--<android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

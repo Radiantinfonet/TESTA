@@ -41,6 +41,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.radiant.rpl.testa.Registration.BaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,16 +60,18 @@ import radiant.rpl.radiantrpl.R;
 
 import static android.view.View.GONE;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends BaseActivity {
 
     TextView course_detail;
 
-    Spinner yearofbirth,monthofbirth,dateofbirth,education,employment,employer,sector,bankname,state,district,input_jobrole,disablity_type,type_of_disablity,
+    Spinner yearofbirth,monthofbirth,dateofbirth,education,employment,employer,sector,bankname,state,district,input_jobrole,
+            disablity_type,type_of_disablity,
             Employment_status,OtherIdproof,
             input_layout_prefferedlanguage,category;
     EditText input_name,input_last_name,input_mobile_no,input_address1,input_Id_no
-            ,input_address2,input_pincode,input_aadhar,input_pancard,input_bank_ac,input_ifsc_code,input_bank_username,input_empid,input_loc,Email;
-    ProgressDialog pd;
+            ,input_address2,input_pincode,input_aadhar,input_pancard,input_bank_ac,input_ifsc_code,
+            input_bank_username,input_empid,input_loc,Email,alt_no,your_city,other_qualification;
+    String emp_statuss;
     String[] banks,states,districts,employers,jobrole;
     List<String> bankslist,Statelist,districtlist,sectorlist,employerlist,jobrolelist,preflang;
     HashMap<String, String> bankdetail = new HashMap<>();
@@ -92,13 +95,13 @@ public class MainActivity extends AppCompatActivity{
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     String yearobirth,monthobirth,dateobirth;
     AwesomeValidation awesomeValidation;
-    String gender,eduction1,employer1,sector1,bankname1,state1,district1,encodedphoto,encodedphotoaadhar,jobrole1,preflang1,categoryy,disablity_type1,
+    String gender,eduction1,employment1,employer1,sector1,bankname1,state1,district1,encodedphoto,encodedphotoaadhar,jobrole1,
+            preflang1,categoryy,disablity_type1,
             type_of_disablity1,Employment_status1,OtherIdproof1;
     String bankiddd,stateiddd,districtiddd,employeridd,employeridname,sectoridd,jobroleeiddd,preflangiddd;
     NetworkStateReceiver networkStateReceiver;
     SwipeRefreshLayout mySwipeRefreshLayout;
     ArrayAdapter<String> jobroleadapter;
-    private android.app.AlertDialog progressDialog;
     static final int REQUEST_IMAGE_CAPTURE = 1;
   String defaultCameraPackage;
   PackageManager packageManager;
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(getLayoutId());
 
 
 
@@ -123,6 +126,11 @@ public class MainActivity extends AppCompatActivity{
         OtherIdproof = findViewById(R.id.otherIdproof);
         input_Id_no = findViewById(R.id.input_Id_no);
         course_detail= findViewById(R.id.course_detail);
+        alt_no = findViewById(R.id.input_alt_mobile_no);
+        your_city = findViewById(R.id.input_city);
+        other_qualification = findViewById(R.id.input_Eduction_other);
+
+
 
 
         //employment=findViewById(R.id.input_layout_Employment);
@@ -151,7 +159,6 @@ public class MainActivity extends AppCompatActivity{
         input_ifsc_code=findViewById(R.id.input_ifsc_code);
         input_bank_username = findViewById(R.id.input_bank_username);
         input_layout_prefferedlanguage=findViewById(R.id.input_layout_prefferedlanguage);
-        progressDialog = new SpotsDialog(MainActivity.this, R.style.Custom);
         awesomeValidation=new AwesomeValidation(ValidationStyle.BASIC);
         checkBox = findViewById(R.id.checkBox);
         Email = findViewById(R.id.input_email);
@@ -220,6 +227,7 @@ public class MainActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(),"Education must be selected",Toast.LENGTH_LONG).show();
                 }
 
+
                 else if (employer1.equals("Select the Employer")){
                     Toast.makeText(getApplicationContext(),"Employer must be selected",Toast.LENGTH_LONG).show();
                 }
@@ -231,6 +239,26 @@ public class MainActivity extends AppCompatActivity{
 
                        Toast.makeText(MainActivity.this, "Employee ID/Seller ID Cannot be empty", Toast.LENGTH_SHORT).show();
                 }
+               else if ((eduction1.equals("Other"))&& (other_qualification.getText().toString().matches(""))){
+                   Toast.makeText(getApplicationContext(),"Education must be filled",Toast.LENGTH_LONG).show();
+               }
+               else if (disablity_type1.equals("Any Disability ?")){
+                   Toast.makeText(getApplicationContext(),"Disability must be Selected",Toast.LENGTH_LONG).show();
+               }
+
+               else if ((disablity_type1.equals("Yes"))&& (type_of_disablity1.equals("Select Type of Disability"))){
+                   Toast.makeText(getApplicationContext(),"Disablity type must be selected",Toast.LENGTH_LONG).show();
+               }
+
+               else if ((disablity_type1.equals("Yes"))&& (type_of_disablity.equals("Select Type of Disability"))){
+                   Toast.makeText(getApplicationContext(),"Disablity type must be selected",Toast.LENGTH_LONG).show();
+               }
+
+               else if (!(OtherIdproof1.equals("Other Id Proof"))&& (input_Id_no.getText().toString().matches(""))){
+                   Toast.makeText(getApplicationContext(),"Id  must be Filled",Toast.LENGTH_LONG).show();
+               }
+
+
 
 
 
@@ -289,9 +317,15 @@ public class MainActivity extends AppCompatActivity{
 
 
                 else if(awesomeValidation.validate() && !(gender.equals("Select Gender"))&& !state1.equals("Select the State")
+                       && ! disablity_type1.equals("Any Disability ?")
+                       && ! ((disablity_type1.equals("Yes"))&& (type_of_disablity.equals("Select Type of Disability")))
                        && !yearobirth.equals("Year") && !district1.equals("Select the District") && !eduction1.equals("Select Education")
-                         && !employer1.equals("Select the Employer") && !(bankname1.equals("Select the Bank")) && !(employeridname.equals("4") &&
-                       (input_empid.getText().toString().matches("")))
+                         && !employer1.equals("Select the Employer") && !(bankname1.equals("Select the Bank"))
+                       && !(employeridname.equals("4") && (input_empid.getText().toString().matches("")))
+                       && !((eduction1.equals("Other"))&& (other_qualification.getText().toString().matches("")))
+                       && !(!(OtherIdproof1.equals("Other Id Proof"))&& (input_Id_no.getText().toString().matches("")))
+
+
                        && !(stateiddd.equals("2") && (input_pancard.getText().toString().matches("")))
                        && !(stateiddd.equals("3") && (input_pancard.getText().toString().matches("")))
                        && !(stateiddd.equals("16") && (input_pancard.getText().toString().matches("")))
@@ -361,8 +395,20 @@ public class MainActivity extends AppCompatActivity{
                      ii.putExtra("picaadhar",encodedphotoaadhar);
                      ii.putExtra("Email",Email.getText().toString());
                      ii.putExtra("categroy", categoryy);
+                     ii.putExtra("alt_no",alt_no.getText().toString());
+                   ii.putExtra("your_city",your_city.getText().toString());
+                   ii.putExtra("other_qualification",other_qualification.getText().toString());
+                   ii.putExtra("input_id_no",input_Id_no.getText().toString());
+                   ii.putExtra("Any_disability",disablity_type1);
+                   ii.putExtra("type_of_disblity",type_of_disablity1);
+                   ii.putExtra("Any_disability",disablity_type1);
+                   ii.putExtra("other_Id_proof_type",OtherIdproof1);
+                   ii.putExtra("Employment_status",Employment_status1);
 
-                     startActivity(ii);
+
+
+
+                   startActivity(ii);
 
                 }else
                 {
@@ -380,18 +426,13 @@ public class MainActivity extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
+                if (checkSelfPermission(Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
                             MY_CAMERA_PERMISSION_CODE);
                 } else {
 
 
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                }
-                } else{
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
@@ -411,8 +452,7 @@ public class MainActivity extends AppCompatActivity{
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public void onClick(View v) {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                        if (checkSelfPermission(Manifest.permission.CAMERA)
+                    if (checkSelfPermission(Manifest.permission.CAMERA)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.CAMERA},
                                 MY_CAMERA_PERMISSION_CODE);
@@ -424,12 +464,6 @@ public class MainActivity extends AppCompatActivity{
                     }
 
                 }
-                    else {
-                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                    }
-            }
-
             });}
 
         catch (Exception e){
@@ -443,16 +477,11 @@ public class MainActivity extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
+                if (checkSelfPermission(Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
                             MY_CAMERA_PERMISSION_CODE);
                 } else {
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
-                }
-                }else {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
                 }
@@ -469,8 +498,7 @@ public class MainActivity extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
+                if (checkSelfPermission(Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
                             MY_CAMERA_PERMISSION_CODE);
@@ -479,10 +507,6 @@ public class MainActivity extends AppCompatActivity{
                     startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
                 }
 
-            }else{
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_AADHAR_REQUEST);
-                }
             }
         });
 
@@ -586,8 +610,16 @@ public class MainActivity extends AppCompatActivity{
 
 
         ArrayAdapter<String> myAdapterEmployment_status = new ArrayAdapter<String>(MainActivity.this,
+
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Employment_status_string));
         myAdapterEmployment_status.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Employment_status.setEnabled(false);
+        Employment_status.setClickable(false);
+
+
+
+
 
         Employment_status.setAdapter(myAdapterEmployment_status);
 
@@ -598,6 +630,7 @@ public class MainActivity extends AppCompatActivity{
                                        int position, long id)
             {
                 Employment_status1=Employment_status.getSelectedItem().toString();
+
 
             }
 
@@ -647,23 +680,6 @@ public class MainActivity extends AppCompatActivity{
 
 
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //Year of birth
 
@@ -756,6 +772,15 @@ public class MainActivity extends AppCompatActivity{
                                        int position, long id)
             {
                 eduction1=education.getSelectedItem().toString();
+
+                if (eduction1.equals("Other")){
+                    other_qualification.setVisibility(View.VISIBLE);
+                }
+                else {
+                    other_qualification.setVisibility(View.GONE);
+                }
+
+
 
             }
 
@@ -1030,10 +1055,10 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-
-
-
-
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
 
     @Override
@@ -1059,11 +1084,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         String serverURL = "https://www.skillassessment.org/sdms/android_connect/get_bank.php";
-        pd = new ProgressDialog(MainActivity.this);
-        pd.setMessage("Loading...");
-        pd.setCancelable(false);
-        pd.setCanceledOnTouchOutside(false);
-        pd.show();
+        show_progressbar();
 
         StringRequest request = new StringRequest(Request.Method.POST, serverURL, new Response.Listener<String>() {
             @Override
@@ -1095,15 +1116,13 @@ public class MainActivity extends AppCompatActivity{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (pd.isShowing()) {
-                    pd.dismiss();
-                }
+               hide_progressbar();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                pd.dismiss();
+                hide_progressbar();
                 Toast.makeText(getApplicationContext(), "Failed to fetch Bank Details", Toast.LENGTH_LONG).show();
             }
         })
@@ -1132,7 +1151,7 @@ public class MainActivity extends AppCompatActivity{
     //Language Api Call
     private void languageSelect(final String cmp_id) {
 
-        progressDialog.show();
+        show_progressbar();
         String serverURL = "https://www.skillassessment.org/sdms/android_connect/get_language.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, serverURL, new Response.Listener<String>() {
@@ -1172,16 +1191,12 @@ public class MainActivity extends AppCompatActivity{
                     e.printStackTrace();
                 }
 
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
+               hide_progressbar();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
+               hide_progressbar();
                 Toast.makeText(getApplicationContext(), "Failed to fetch Language Details", Toast.LENGTH_LONG).show();
             }
         })
@@ -1282,11 +1297,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         String serverURL = "https://www.skillassessment.org/sdms/android_connect/get_district.php";
-        pd = new ProgressDialog(MainActivity.this);
-        pd.setMessage("Loading...");
-        pd.setCancelable(false);
-        pd.setCanceledOnTouchOutside(false);
-         pd.show();
+        show_progressbar();
 
         StringRequest request = new StringRequest(Request.Method.POST, serverURL, new Response.Listener<String>() {
             @Override
@@ -1324,15 +1335,13 @@ public class MainActivity extends AppCompatActivity{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (pd.isShowing()) {
-                    pd.dismiss();
-                }
+               hide_progressbar();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                   pd.dismiss();
+                   hide_progressbar();
                 Toast.makeText(getApplicationContext(), "Failed to fetch Districts", Toast.LENGTH_LONG).show();
             }
         })
@@ -1506,6 +1515,13 @@ public class MainActivity extends AppCompatActivity{
 
                     JSONObject jobj = new JSONObject(response);
                     String status= jobj.getString("status");
+                    emp_statuss=jobj.getString("emp_status");
+
+                    ArrayAdapter myAdap = (ArrayAdapter) Employment_status.getAdapter(); //cast to an ArrayAdapter
+                    int spinnerPosition = myAdap.getPosition(emp_statuss);
+
+//set the default according to value
+                    Employment_status.setSelection(spinnerPosition);
 
                     /*if (jobrolelist.size()<=1){
                         jobrolelist.clear();
@@ -1534,20 +1550,18 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(),"Failed to fetch Job Roles",Toast.LENGTH_LONG).show();
                     }
 
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
+               hide_progressbar();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
+                hide_progressbar();
                 Toast.makeText(getApplicationContext(), "Failed to fetch Job Roles", Toast.LENGTH_LONG).show();
             }
         })

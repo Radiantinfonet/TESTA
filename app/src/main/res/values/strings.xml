@@ -50,39 +50,39 @@ status of each question using one of the following symbols:</string>
     <string name="line12">7.3.3  To mark the question for review, click on <b>Mark for Review </b></string>
 
 
-    <string name="hint_name">First Name</string>
+    <string name="hint_name">First Name*</string>
     <string name="hint_middile_name">Middle Name</string>
-    <string name="hint_last_name">Last Name</string>
-    <string name="hint_dob">Date of Birth</string>
-    <string name="hint_gender">Gender</string>
-    <string name="hint_mobile"> Mobile No</string>
+    <string name="hint_last_name">Last Name*</string>
+    <string name="hint_dob">Date of Birth*</string>
+    <string name="hint_gender">Gender*</string>
+    <string name="hint_mobile"> Mobile No*</string>
     <string name="alt_hint_mobile">Alternate Number</string>
     <string name="hint_landline">Landline No</string>
     <string name="hint_email">Email Id</string>
-    <string name="hint_address_line1">Address Line1</string>
+    <string name="hint_address_line1">Address Line1*</string>
     <string name="hint_city">Enter your city</string>
 
 
     <string name="hint_address_line2">Address Line2</string>
-    <string name="hint_State">State</string>
+    <string name="hint_State">State*</string>
     <string name="hint_district">District</string>
-    <string name="hint_pincode">Pincode</string>
-    <string name="hint_other">Other</string>
-    <string name="hint_other_id">Id Number</string>
-    <string name="hint_qualification">Qualification</string>
-    <string name="hint_employment">Employment</string>
-    <string name="hint_aadhar">Aadhar No</string>
-    <string name="hint_pancard">PAN Card</string>
-    <string name="hint_Photograph">Photograph</string>
+    <string name="hint_pincode">Pincode*</string>
+    <string name="hint_other">Other*</string>
+    <string name="hint_other_id">Id Number*</string>
+    <string name="hint_qualification">Qualification*</string>
+    <string name="hint_employment">Employment*</string>
+    <string name="hint_aadhar">Aadhar No*</string>
+    <string name="hint_pancard">PAN Card*</string>
+    <string name="hint_Photograph">Photograph*</string>
     <string name="hint_Sector">Sector</string>
     <string name="hint_jobrole">Jobrole</string>
     <string name="hint_empid">Employee ID/Seller ID</string>
     <string name="hint_location">Store Location/Location</string>
-    <string name="hint_anyDisablity">AnyDisablity</string>
-    <string name="hint_category">Category</string>
-    <string name="hint_bank_name">Bank Name</string>
-    <string name="hint_bank_ac">Bank Account No</string>
-    <string name="hint_ifsc_code">IFSC Code</string>
+    <string name="hint_anyDisablity">AnyDisablity*</string>
+    <string name="hint_category">Category*</string>
+    <string name="hint_bank_name">Bank Name*</string>
+    <string name="hint_bank_ac">Bank Account No*</string>
+    <string name="hint_ifsc_code">IFSC Code*</string>
     <string name="hint_pan">PAN Card No</string>
     <string name="hint_employer">Employer</string>
     <string name="hint_preffered_language">Examination Preffered Language</string>
@@ -133,7 +133,7 @@ status of each question using one of the following symbols:</string>
     <string-array name="Employment_status_string">
         <item>Select</item>
         <item>Employee</item>
-        <item>Self-employed</item>
+        <item>Self Employed</item>
 
     </string-array>
 
@@ -279,6 +279,8 @@ status of each question using one of the following symbols:</string>
         <item>Polytechnic</item>
         <item>Graduate</item>
         <item>Graduation and above</item>
+        <item>Other</item>
+
     </string-array>
 
     <string-array name="Employment">

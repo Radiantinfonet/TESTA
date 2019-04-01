@@ -58,17 +58,18 @@ public class Start_Registration extends AppCompatActivity implements UpdateHelpe
             @Override
             public void onClick(View v) {
                 Intent ii=new Intent(Start_Registration.this, MainActivity.class);
+                //overridePendingTransition(R.anim.slide_out_up, R.anim.slide_in_up);
                 startActivity(ii);
             }
         }
         );
-        b2.setOnClickListener(new View.OnClickListener() {
+       /* b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ii=new Intent(Start_Registration.this,SignInAct.class);
                 startActivity(ii);
             }
-        });
+        });*/
 
     }
 

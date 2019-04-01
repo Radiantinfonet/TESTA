@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,10 +29,13 @@ import radiant.rpl.radiantrpl.R;
 
 public class Reverify extends AppCompatActivity {
 
-    EditText fname_txt,lname_txt,mob_txt,aadharno_txt,bankacc_txt,pan_text,Name_in_bank_txt,Ifsc_code_txt;
-    String fname,lname,mob,aadharno,bankacc,yearobirth,monthobirth,dateobirthh,gender,bank1,statee,districtt,educationn,pancardd,alternatenumber,employerr,sectorr,addline11,addline22,pincode1,nameasinbank1,
-    iffccode1,photouri,jobrolee,empidd,locationn,aadharpic,language,category1,Email1;
-    String getFname,getLname,getMob,getAadharno,getBankacc;
+    EditText fname_txt,lname_txt,mob_txt,aadharno_txt,bankacc_txt,pancard_txt,name_in_bank,ifsc_txt;
+    String fname,lname,mob,aadharno,bankacc,yearobirth,monthobirth,dateobirthh,gender,bank1,statee,
+            districtt,educationn,employedd,employerr,sectorr,addline11,addline22,pincode1,nameasinbank1,
+    iffccode1,photouri,jobrolee,empidd,locationn,aadharpic,language,category1,Email1,disablity_type,type_of_disablity,job_status,
+            other_id_proof,other_id_proof_no,pancard
+            ,alt_no,your_city,other_qualification;
+    String getFname,getLname,getMob,getAadharno,getBankacc,getpancard,getname_in_bank,get_ifsc;
     ProgressDialog pd;
     Button btn_Register;
     AwesomeValidation awesomeValidation;
@@ -46,13 +50,16 @@ public class Reverify extends AppCompatActivity {
         mob_txt=findViewById(R.id.input_mobile_noo);
         aadharno_txt=findViewById(R.id.input_aadhar_no);
         bankacc_txt=findViewById(R.id.input_bank_acdetails);
-        pan_text=findViewById(R.id.input_pancard);
-        Name_in_bank_txt=findViewById(R.id.input_bank_username1);
-        Ifsc_code_txt=findViewById(R.id.input_ifsc_code1);
+        pancard_txt = findViewById(R.id.input_pancard);
+        name_in_bank = findViewById(R.id.input_bank_username1);
+        ifsc_txt = findViewById(R.id.input_ifsc_code1);
+
+
         geturl= Start_Registration.getURL();
         gettestingurl=Start_Registration.getTestingURL();
         awesomeValidation=new AwesomeValidation(ValidationStyle.BASIC);
         Intent ii=getIntent();
+
         fname=ii.getStringExtra("first_namee");
         lname=ii.getStringExtra("last_namee");
         mob=ii.getStringExtra("mobile");
@@ -82,12 +89,33 @@ public class Reverify extends AppCompatActivity {
         photouri=ii.getStringExtra("pic");
         category1 = ii.getStringExtra("categroy");
         Email1= ii.getStringExtra("Email");
+        disablity_type = ii.getStringExtra("Any_disability");
+        type_of_disablity= ii.getStringExtra("type_of_disblity");
+        job_status=ii.getStringExtra("Employment_status");
+        other_id_proof=ii.getStringExtra("other_Id_proof_type");
+        alt_no= ii.getStringExtra("alt_no");
+        your_city= ii.getStringExtra("your_city");
+        other_qualification= ii.getStringExtra("other_qualification");
+        other_id_proof_no = ii.getStringExtra("input_id_no");
+        pancard = ii.getStringExtra("pancard");
+
+
+
+
+
+
+
 
         fname_txt.setText(fname);
         lname_txt.setText(lname);
         mob_txt.setText(mob);
         aadharno_txt.setText(aadharno);
         bankacc_txt.setText(bankacc);
+        pancard_txt.setText(pancard);
+        name_in_bank.setText(nameasinbank1);
+        ifsc_txt.setText(iffccode1);
+
+
 
         btn_Register=findViewById(R.id.btn_Register);
 
@@ -99,8 +127,61 @@ public class Reverify extends AppCompatActivity {
                 getMob=mob_txt.getText().toString();
                 getAadharno=aadharno_txt.getText().toString();
                 getBankacc=bankacc_txt.getText().toString();
-                SaveDetail(getFname,getLname,getMob,getAadharno,getBankacc);
+                getpancard = pancard_txt.getText().toString();
+                getname_in_bank = name_in_bank.getText().toString();
+                get_ifsc = ifsc_txt.getText().toString();
+                if ((statee.equals("2") && (pancard_txt.getText().toString().matches(""))) ||
+                        (statee.equals("3") && (pancard_txt.getText().toString().matches(""))) ||
+                        (statee.equals("16") && (pancard_txt.getText().toString().matches("")))  ||
+                        (statee.equals("17") && (pancard_txt.getText().toString().matches(""))) ||
+                        (statee.equals("18") && (pancard_txt.getText().toString().matches(""))) ||
+                        (statee.equals("23") && (pancard_txt.getText().toString().matches("")))||
+                        (statee.equals("19") && (pancard_txt.getText().toString().matches(""))) ||
+                        (statee.equals("26") && (pancard_txt.getText().toString().matches("")))||
+                        (statee.equals("10") && (pancard_txt.getText().toString().matches(""))) )
 
+                {
+
+                    Toast.makeText(Reverify.this, "PAN Card cannot be empty according to your State", Toast.LENGTH_SHORT).show();
+                }
+
+                else if ((statee.equals("1") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("4") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("5") && (aadharno_txt.getText().toString().matches("")))  ||
+                        (statee.equals("6") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("7") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("8") && (aadharno_txt.getText().toString().matches("")))||
+                        (statee.equals("9") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("11") && (aadharno_txt.getText().toString().matches("")))||
+                        (statee.equals("12") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("13") && (aadharno_txt.getText().toString().matches("")))  ||
+                        (statee.equals("14") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("15") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("19") && (aadharno_txt.getText().toString().matches("")))||
+                        (statee.equals("20") && (aadharno_txt.getText().toString().matches("")))||
+                        (statee.equals("21") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("22") && (aadharno_txt.getText().toString().matches("")))  ||
+                        (statee.equals("24") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("25") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("27") && (aadharno_txt.getText().toString().matches("")))||
+                        (statee.equals("28") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("30") && (aadharno_txt.getText().toString().matches("")))  ||
+                        (statee.equals("31") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("32") && (aadharno_txt.getText().toString().matches(""))) ||
+                        (statee.equals("33") && (aadharno_txt.getText().toString().matches("")))  ||
+                        (statee.equals("34") && (aadharno_txt.getText().toString().matches(""))))
+
+
+
+
+
+                {
+
+                    Toast.makeText(Reverify.this, "Aadhar Card Can't be empty according to your state", Toast.LENGTH_SHORT).show();
+                }
+               else if (awesomeValidation.validate()) {
+                    SaveDetail(getFname, getLname, getMob, getAadharno, getBankacc, getpancard, getname_in_bank, get_ifsc);
+                }
 
             }
         });
@@ -108,22 +189,15 @@ public class Reverify extends AppCompatActivity {
         awesomeValidation.addValidation(Reverify.this, R.id.input_fname,"[a-zA-Z\\s]+", R.string.err_msg_for_first_name);
         awesomeValidation.addValidation(Reverify.this, R.id.input_last_lname,"[a-zA-Z\\s]+", R.string.err_msg_for_last_name);
         awesomeValidation.addValidation(Reverify.this, R.id.input_mobile_noo,"^[0-9]{10}$", R.string.err_msg_formobile);
-        awesomeValidation.addValidation(Reverify.this, R.id.input_aadhar_no,"^[0-9]{12}$", R.string.err_msg_foraadhar);
+        //awesomeValidation.addValidation(Reverify.this, R.id.input_aadhar_no,"^[0-9]{12}$", R.string.err_msg_foraadhar);
+        awesomeValidation.addValidation(Reverify.this, R.id.input_bank_username1,"[a-zA-Z\\s]+", R.string.err_msg_for_namein_bank);
+        awesomeValidation.addValidation(Reverify.this, R.id.input_ifsc_code1,"^[a-zA-Z0-9]{5,14}$", R.string.err_msg_for_ifsc);
         awesomeValidation.addValidation(Reverify.this, R.id.input_bank_acdetails,"^[0-9]{6,18}$", R.string.err_msg_for_acno);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-      /*  if (!pincode1.equals(null)){
-            pan_text.setEnabled(false);
-        }
-        else if (!aadharno.equals(null)){
-            aadharno_txt.setEnabled(false);
-        }*/
-    }
 
-    private void SaveDetail(final String fnamee, final String lnamee, final String mobbb, final String aadhaar, final String bankacccc) {
+    private void SaveDetail(final String fnamee, final String lnamee, final String mobbb, final String aadhaar, final String bankacccc,
+                            final String pancard,final String name_in_bank,final String ifsc) {
         String serverURL = "https://www.skillassessment.org/sdms/android_connect/save_student_data.php";
         pd = new ProgressDialog(Reverify.this);
         pd.setMessage("Loading...");
@@ -147,6 +221,7 @@ public class Reverify extends AppCompatActivity {
 
                     else {
                         Toast.makeText(getApplicationContext(),"Error Saving the details"+response,Toast.LENGTH_LONG).show();
+                        Log.d("Response",response);
                     }
 
                 } catch (JSONException e) {
@@ -183,8 +258,13 @@ public class Reverify extends AppCompatActivity {
                 map.put("firstname",fnamee);
                 map.put("lastname",lnamee);
                 map.put("mobile",mobbb);
-                map.put("aadhar",aadhaar);
+
                 map.put("bankac",bankacccc);
+                map.put("pan",pancard);
+
+
+
+
                 if (monthobirth!=null || dateobirthh!=null){
                 map.put("dob",yearobirth+"-"+monthobirth+"-"+dateobirthh);}
                 else{
@@ -216,8 +296,36 @@ public class Reverify extends AppCompatActivity {
                 if (Email1!=null){
                 map.put("email",Email1);}
 
+                if (disablity_type!=null){
+                    map.put("disabilitytype",disablity_type);}
 
-                if (aadharpic!=null){
+                if (type_of_disablity!=null){
+                    map.put("disability",disablity_type);}
+
+                if (job_status!=null){
+                    map.put("employment",job_status);}
+
+                if (other_id_proof!=null){
+                    map.put("other_id_type",other_id_proof);}
+
+                if (other_id_proof_no!=null){
+                    map.put("other_id_number",other_id_proof_no);}
+
+
+                if (alt_no!=null){
+                    map.put("landline",alt_no);}
+
+
+                if (your_city!=null){
+                    map.put("City",your_city);}
+
+
+                if (other_qualification!=null){
+                    map.put("other_qualification",other_qualification);}
+
+
+
+                    if (aadharpic!=null){
                 map.put("aadhar_image",aadharpic);}
                 map.put("student_image",photouri);
                 map.put("data_source","Mobile");
