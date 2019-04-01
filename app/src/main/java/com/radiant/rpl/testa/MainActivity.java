@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity{
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     String yearobirth,monthobirth,dateobirth;
     AwesomeValidation awesomeValidation;
-    String gender,eduction1,employment1,employer1,sector1,bankname1,state1,district1,encodedphoto,encodedphotoaadhar,jobrole1,preflang1,categoryy,disablity_type1,
+    String gender,eduction1,employer1,sector1,bankname1,state1,district1,encodedphoto,encodedphotoaadhar,jobrole1,preflang1,categoryy,disablity_type1,
             type_of_disablity1,Employment_status1,OtherIdproof1;
     String bankiddd,stateiddd,districtiddd,employeridd,employeridname,sectoridd,jobroleeiddd,preflangiddd;
     NetworkStateReceiver networkStateReceiver;
