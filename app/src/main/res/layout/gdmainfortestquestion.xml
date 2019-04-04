@@ -15,6 +15,7 @@
             android:layout_gravity="center"
             android:text="Hello guys"
             android:gravity="center"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_tv"
             />
 

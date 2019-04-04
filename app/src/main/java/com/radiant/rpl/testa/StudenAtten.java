@@ -117,28 +117,35 @@ public class StudenAtten extends AppCompatActivity implements GoogleApiClient.Co
         }
 
         try{
-        img.setOnClickListener(new View.OnClickListener() {
+            img.setOnClickListener(new View.OnClickListener() {
 
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-                            MY_CAMERA_PERMISSION_CODE);
-                } else {
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
-                    cameraIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
-                    cameraIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View v) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (checkSelfPermission(Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                                    MY_CAMERA_PERMISSION_CODE);
+                        } else {
+                            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                            cameraIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                            cameraIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+                            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                        }
+
+                    }
+                    else {
+                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                        cameraIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                        cameraIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+                        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                    }
                 }
 
-            }
-            }
-
-        });}catch (Exception e){
+            });}catch (Exception e){
             e.printStackTrace();
         }
         b1.setOnClickListener(new View.OnClickListener() {

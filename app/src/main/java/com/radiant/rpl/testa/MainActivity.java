@@ -9,7 +9,10 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,6 +45,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.face.Face;
+import com.google.android.gms.vision.face.FaceDetector;
 import com.radiant.rpl.testa.Registration.BaseActivity;
 
 import org.json.JSONArray;
@@ -1630,6 +1637,36 @@ public class MainActivity extends BaseActivity {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 encodedphoto = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
+                Paint myRectPaint = new Paint();
+                myRectPaint.setStrokeWidth(5);
+                myRectPaint.setColor(Color.RED);
+                myRectPaint.setStyle(Paint.Style.STROKE);
+                Bitmap tempBitmap = Bitmap.createBitmap(currentBitmapWidth, currentBitmapHeight, Bitmap.Config.RGB_565);
+                Canvas tempCanvas = new Canvas(tempBitmap);
+                tempCanvas.drawBitmap(newbitMap, 0, 0, null);
+
+                FaceDetector faceDetector = new
+                        FaceDetector.Builder(getApplicationContext()).setTrackingEnabled(false)
+                        .build();
+                if(!faceDetector.isOperational()){
+                    Toast.makeText(getApplicationContext(),"Could not set up the face detector!",Toast.LENGTH_LONG).show();
+                   // new AlertDialog.Builder(v.getContext()).setMessage("Could not set up the face detector!").show();
+                    return;
+                }
+
+                Frame frame = new Frame.Builder().setBitmap(newbitMap).build();
+                SparseArray<Face> faces = faceDetector.detect(frame);
+
+                for(int i=0; i<faces.size(); i++) {
+                    Face thisFace = faces.valueAt(i);
+                    float x1 = thisFace.getPosition().x;
+                    float y1 = thisFace.getPosition().y;
+                    float x2 = x1 + thisFace.getWidth();
+                    float y2 = y1 + thisFace.getHeight();
+                    tempCanvas.drawRoundRect(new RectF(x1, y1, x2, y2), 2, 2, myRectPaint);
+                    Toast.makeText(getApplicationContext(),"Face found",Toast.LENGTH_LONG).show();
+                }
+                //myImageView.setImageDrawable(new BitmapDrawable(getResources(),tempBitmap));
             }
 
             if (requestCode == CAMERA_AADHAR_REQUEST && resultCode == Activity.RESULT_OK) {

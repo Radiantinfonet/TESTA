@@ -63,13 +63,13 @@ public class Start_Registration extends AppCompatActivity implements UpdateHelpe
             }
         }
         );
-       /* b2.setOnClickListener(new View.OnClickListener() {
+        b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ii=new Intent(Start_Registration.this,SignInAct.class);
                 startActivity(ii);
             }
-        });*/
+        });
 
     }
 
