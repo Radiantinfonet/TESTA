@@ -23,9 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name="com.radiant.rpl.testa.ExamSection.Thankspage">
-
-        </activity>
+        <activity android:name="com.radiant.rpl.testa.Registration.Upload_photos"
+            android:theme="@style/Apptheme2"
+            android:label="Photos"
+            ></activity>
+        <activity android:name="com.radiant.rpl.testa.ExamSection.Thankspage"></activity>
         <activity
             android:name="com.radiant.rpl.testa.ExamSection.Update_profile"
             android:theme="@style/AppTheme1" />
@@ -54,23 +56,23 @@
             android:theme="@style/AppTheme1" />
         <activity
             android:name="com.radiant.rpl.testa.Reverify"
-            android:screenOrientation="portrait"
             android:label="Verify Details"
-            android:theme="@style/Apptheme2"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Apptheme2" />
         <activity
             android:name="com.radiant.rpl.testa.ExamSection.Testviva"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme1" />
         <activity
             android:name="com.radiant.rpl.testa.MainActivity"
-            android:screenOrientation="portrait"
             android:label="Registration"
+            android:screenOrientation="portrait"
             android:theme="@style/Apptheme2" />
         <activity
             android:name="com.radiant.rpl.testa.Registration_Done"
-            android:theme="@style/Apptheme2"
             android:label="Registered"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Apptheme2" />
         <activity
             android:name="com.radiant.rpl.testa.Start_Registration"
             android:screenOrientation="portrait"

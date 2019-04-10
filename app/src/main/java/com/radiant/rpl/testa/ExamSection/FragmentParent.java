@@ -1,6 +1,7 @@
 package com.radiant.rpl.testa.ExamSection;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import com.radiant.rpl.testa.LocalDB.DbAutoSave;
 
 import radiant.rpl.radiantrpl.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by DAT on 9/1/2015.
  */
@@ -25,14 +28,18 @@ public class FragmentParent extends Fragment {
     private ViewPagerAdapter adapter;
     DbAutoSave dbAutoSave;
     int pageno,pagenoo;
-    TextView prev,skip,next;
+    TextView prev,skip,next,markforreview;
     private static ShowButton showbuttonn;
+    String stuidd;
+    SharedPreferences spp;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_parent, container, false);
         dbAutoSave=new DbAutoSave(getContext());
+        spp=getActivity().getSharedPreferences("mypref", MODE_PRIVATE);
+        stuidd=spp.getString("userid","");
         getIDs(view);
 
         return view;
@@ -40,10 +47,12 @@ public class FragmentParent extends Fragment {
 
     private void getIDs(View view) {
         viewPager = (ViewPager) view.findViewById(R.id.my_viewpager);
+        markforreview=view.findViewById(R.id.markforrevieww);
         View vv=view.findViewById(R.id.count_down_strip_footer);
         prev=vv.findViewById(R.id.prev);
         next=vv.findViewById(R.id.next);
         skip=vv.findViewById(R.id.skip);
+
         adapter = new ViewPagerAdapter(getFragmentManager());
         viewPager.setAdapter(adapter);
         pagenoo=viewPager.getCurrentItem();
@@ -118,7 +127,7 @@ public class FragmentParent extends Fragment {
 
     }
 
-    public void addPage(String pagename, String que, int pgn,String op1, String op2, String op3, String op4) {
+    public void addPage(final String pagename, final String que, int pgn, String op1, String op2, String op3, String op4) {
         Bundle bundle = new Bundle();
         bundle.putString("data", pagename);
         bundle.putInt("pgno",pgn);
@@ -131,6 +140,15 @@ public class FragmentParent extends Fragment {
         fragmentChild.setArguments(bundle);
         adapter.addFrag(fragmentChild, pagename,que);
         adapter.notifyDataSetChanged();
+
+        markforreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbAutoSave.insertDataunanswered(stuidd, pagename,"0");
+            }
+        });
+
+
         if (adapter.getCount() > 0)
             viewPager.setCurrentItem(0);
     }

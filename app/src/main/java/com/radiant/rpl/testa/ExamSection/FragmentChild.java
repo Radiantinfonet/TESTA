@@ -39,12 +39,25 @@ public class FragmentChild extends Fragment implements View.OnClickListener {
     String query;
     boolean statusvalue;
     HashMap<String,String> hm=new HashMap<>();
-
+    boolean anyButtonClicked=false;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_child, container, false);
+
+        view.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if(event.getAction() == MotionEvent.ACTION_MOVE){
+                    //do something
+                }
+                return true;
+            }
+        });
+
+
+
         Bundle bundle = getArguments();
         pgnn=bundle.getInt("pgno");
         childname = bundle.getString("data");
@@ -124,6 +137,7 @@ public class FragmentChild extends Fragment implements View.OnClickListener {
             onResume();
         }
     }
+
 
     @Override
     public void onResume()
@@ -205,6 +219,12 @@ public class FragmentChild extends Fragment implements View.OnClickListener {
         changeColorBack(titleb);
         changeColorBack(titlec);
         changeColorBack(titled);
+
+        if (anyButtonClicked) {
+            System.out.println("button clicked captured");
+        } else {
+            anyButtonClicked = true;
+        }
 
         switch (v.getId()) {
             case R.id.option1:

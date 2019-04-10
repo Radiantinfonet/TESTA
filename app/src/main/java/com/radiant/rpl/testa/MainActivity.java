@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -21,9 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.util.Patterns;
 import android.util.SparseArray;
 import android.view.View;
@@ -32,7 +31,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,15 +60,13 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import dmax.dialog.SpotsDialog;
 import radiant.rpl.radiantrpl.R;
 
-import static android.view.View.GONE;
 
 public class MainActivity extends BaseActivity {
 
     TextView course_detail;
-
+    Paint myRectPaint;
     Spinner yearofbirth,monthofbirth,dateofbirth,education,employment,employer,sector,bankname,state,district,input_jobrole,
             disablity_type,type_of_disablity,
             Employment_status,OtherIdproof,
@@ -102,24 +98,19 @@ public class MainActivity extends BaseActivity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     String yearobirth,monthobirth,dateobirth;
     AwesomeValidation awesomeValidation;
-    String gender,eduction1,employment1,employer1,sector1,bankname1,state1,district1,encodedphoto,encodedphotoaadhar,jobrole1,
+    String gender,eduction1,employer1,sector1,bankname1,state1,district1,encodedphoto,encodedphotoaadhar,jobrole1,
             preflang1,categoryy,disablity_type1,
             type_of_disablity1,Employment_status1,OtherIdproof1;
-    String bankiddd,stateiddd,districtiddd,employeridd,employeridname,sectoridd,jobroleeiddd,preflangiddd;
+    String bankiddd,stateiddd,districtiddd,employeridname,sectoridd,jobroleeiddd,preflangiddd;
     NetworkStateReceiver networkStateReceiver;
     SwipeRefreshLayout mySwipeRefreshLayout;
     ArrayAdapter<String> jobroleadapter;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-  String defaultCameraPackage;
-  PackageManager packageManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-
-
-
 
         final Spinner myspinner = findViewById(R.id.input_layout_gender);
         yearofbirth=findViewById(R.id.input_layout_year);
@@ -136,11 +127,6 @@ public class MainActivity extends BaseActivity {
         alt_no = findViewById(R.id.input_alt_mobile_no);
         your_city = findViewById(R.id.input_city);
         other_qualification = findViewById(R.id.input_Eduction_other);
-
-
-
-
-        //employment=findViewById(R.id.input_layout_Employment);
         employer=findViewById(R.id.input_layout_Employer);
         sector=findViewById(R.id.input_layout_Sector);
         bankname=findViewById(R.id.input_layout_bankname);
@@ -180,7 +166,13 @@ public class MainActivity extends BaseActivity {
         awesomeValidation.addValidation(MainActivity.this, R.id.input_email, Patterns.EMAIL_ADDRESS, R.string.err_msg_email);
        // awesomeValidation.addValidation(MainActivity.this, R.id.input_aadhar,"^[0-9]{12}$", R.string.err_msg_foraadhar);
         sector.setEnabled(false);
-       /*
+
+        myRectPaint = new Paint();
+        myRectPaint.setStrokeWidth(2);
+        myRectPaint.setColor(Color.RED);
+        myRectPaint.setStyle(Paint.Style.STROKE);
+
+        /*
         employer.setEnabled(false);
         input_jobrole.setEnabled(false);
         input_empid.setEnabled(false);
@@ -471,7 +463,8 @@ public class MainActivity extends BaseActivity {
                     }
 
                 }
-            });}
+            });
+        }
 
         catch (Exception e){
             e.printStackTrace();
@@ -1629,7 +1622,7 @@ public class MainActivity extends BaseActivity {
 
                 int currentBitmapWidth = photo.getWidth();
                 int currentBitmapHeight = photo.getHeight();
-                input_photograph.setImageBitmap(photo);
+                //input_photograph.setImageBitmap(photo);
                 int newHeight = (int) Math.floor((double) currentBitmapHeight * ((double) currentBitmapWidth / (double) currentBitmapWidth));
                 Bitmap newbitMap = Bitmap.createScaledBitmap(photo, currentBitmapWidth, newHeight, true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -1637,37 +1630,50 @@ public class MainActivity extends BaseActivity {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 encodedphoto = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-                Paint myRectPaint = new Paint();
-                myRectPaint.setStrokeWidth(5);
-                myRectPaint.setColor(Color.RED);
-                myRectPaint.setStyle(Paint.Style.STROKE);
-                Bitmap tempBitmap = Bitmap.createBitmap(currentBitmapWidth, currentBitmapHeight, Bitmap.Config.RGB_565);
+                Bitmap tempBitmap = Bitmap.createBitmap(photo.getWidth(), photo.getHeight(), Bitmap.Config.RGB_565);
                 Canvas tempCanvas = new Canvas(tempBitmap);
-                tempCanvas.drawBitmap(newbitMap, 0, 0, null);
+                tempCanvas.drawBitmap(photo, 0, 0, null);
 
                 FaceDetector faceDetector = new
                         FaceDetector.Builder(getApplicationContext()).setTrackingEnabled(false)
                         .build();
                 if(!faceDetector.isOperational()){
-                    Toast.makeText(getApplicationContext(),"Could not set up the face detector!",Toast.LENGTH_LONG).show();
-                   // new AlertDialog.Builder(v.getContext()).setMessage("Could not set up the face detector!").show();
+                    new AlertDialog.Builder(getApplicationContext()).setMessage("Could not set up the face detector!").show();
                     return;
                 }
-
-                Frame frame = new Frame.Builder().setBitmap(newbitMap).build();
+                Frame frame = new Frame.Builder().setBitmap(photo).build();
                 SparseArray<Face> faces = faceDetector.detect(frame);
+                System.out.println("iiii"+faces.get(1));
 
                 for(int i=0; i<faces.size(); i++) {
                     Face thisFace = faces.valueAt(i);
-                    float x1 = thisFace.getPosition().x;
+                    Float x1=new Float(0);
+                    x1 = thisFace.getPosition().x;
                     float y1 = thisFace.getPosition().y;
                     float x2 = x1 + thisFace.getWidth();
                     float y2 = y1 + thisFace.getHeight();
-                    tempCanvas.drawRoundRect(new RectF(x1, y1, x2, y2), 2, 2, myRectPaint);
-                    Toast.makeText(getApplicationContext(),"Face found",Toast.LENGTH_LONG).show();
+
+                    //tempCanvas.drawCircle(x1,y1,1,myRectPaint);
+
+                    tempCanvas.drawRoundRect(new RectF(x1, y1, x2, y2), 1, 1, myRectPaint);
+
                 }
-                //myImageView.setImageDrawable(new BitmapDrawable(getResources(),tempBitmap));
+                if (faces.size()==0){
+                    Toast.makeText(this,"No face detected",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(this,"Face detected",Toast.LENGTH_LONG).show();
+                }
+
+                input_photograph.setImageDrawable(new BitmapDrawable(getResources(),tempBitmap));
             }
+
+
+
+
+
+
+
 
             if (requestCode == CAMERA_AADHAR_REQUEST && resultCode == Activity.RESULT_OK) {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");

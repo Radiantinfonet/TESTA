@@ -14,7 +14,7 @@
         android:layout_gravity="center" android:id="@+id/timer"
         android:background="@color/BBlue"
         android:layout_marginTop="5dp"
-        android:layout_width="0.0dip" android:layout_height="60dp"
+        android:layout_width="0.0dip" android:layout_height="fill_parent"
         android:text="00:00" android:layout_weight="1.0"
         style="@style/text_h5" />
 
@@ -26,5 +26,5 @@
         android:visibility="invisible"
         android:background="#c70202"
         android:layout_marginTop="5dp"
-        android:layout_height="60dp" android:text="Submit" android:layout_weight="1.0" style="@style/text_h5" />
+        android:layout_height="fill_parent" android:text="Submit" android:layout_weight="1.0" style="@style/text_h5" />
 </LinearLayout>
